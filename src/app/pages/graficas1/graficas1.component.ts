@@ -35,7 +35,7 @@ export class Graficas1Component implements OnInit {
   };
 
   constructor() {
-    console.log(this.graficos.grafico1.labels);
+    // console.log(this.graficos.grafico1.labels);
   }
 
   ngOnInit() {
