@@ -7,16 +7,19 @@ import { Graficas1Component } from './graficas1/graficas1.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 
+import { LoginGuardsGuard } from './../services/guards/login-guards.guard';
+
 const pagesRoutes: Routes = [
   {
     path: '',
     component: PagesComponent,
+    canActivate: [ LoginGuardsGuard ],
     children: [
       { path: 'dashboard', component: DashboardComponent, data: { titulo: 'Dashboard'} },
       { path: 'progress', component: ProgressComponent, data: { titulo: 'ProgressBars'}  },
       { path: 'graficas1', component: Graficas1Component, data: { titulo: 'Graphs'}  },
       { path: 'promesas', component: PromesasComponent, data: { titulo: 'Promise'}  },
-      { path: 'Observable', component: RxjsComponent, data: { titulo: 'Observable'}  },
+      { path: 'rxjs', component: RxjsComponent, data: { titulo: 'Observable'}  },
       { path: 'account-setting', component: AccountSettingsComponent, data: { titulo: 'Setting'}  },
       { path: '', redirectTo: '/dashboard', pathMatch: 'full', data: { titulo: 'Dashboard'}  }
     ]
