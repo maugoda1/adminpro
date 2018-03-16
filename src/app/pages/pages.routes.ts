@@ -1,3 +1,4 @@
+import { ProfileComponent } from './profile/profile.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { Routes, RouterModule } from '@angular/router';
 import { PagesComponent } from './pages.component';
@@ -21,6 +22,7 @@ const pagesRoutes: Routes = [
       { path: 'promesas', component: PromesasComponent, data: { titulo: 'Promise'}  },
       { path: 'rxjs', component: RxjsComponent, data: { titulo: 'Observable'}  },
       { path: 'account-setting', component: AccountSettingsComponent, data: { titulo: 'Setting'}  },
+      { path: 'profile', component: ProfileComponent, data: { titulo: 'Perfil de Usuario'}  },
       { path: '', redirectTo: '/dashboard', pathMatch: 'full', data: { titulo: 'Dashboard'}  }
     ]
   }
