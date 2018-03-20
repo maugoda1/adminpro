@@ -5,11 +5,14 @@ import { Router } from '@angular/router';
 
 import { URL_SERVICIOS } from '../../config/config';
 
-import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/map'; // operador Map. cuando el servidor devuelve valor correcto
+import 'rxjs/add/operator/catch'; // operador chatch. cuando el servidor devuelve error
+import { Observable } from 'rxjs/Observable'; // para el catch retorne un observable.
+
 import { SubirArchivoService } from '../subirArchivo/subir-archivo.service';
 
 @Injectable()
-export class UsuarioService { 
+export class UsuarioService {
 
   usuario: Usuario;
   token: string;
@@ -83,6 +86,11 @@ export class UsuarioService {
         .map((resp: any) => {
           this.guardarStorage(resp.id, resp.token, resp.usuario);
           return true;
+        })
+        .catch ( (err: any) => {
+          // console.log('status Error:', err);
+          swal('Error en el Login', err.error.mensaje, 'error');
+          return Observable.throw( err );
         });
 
   }
