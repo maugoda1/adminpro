@@ -167,7 +167,7 @@
                                 <label class="col-md-12">Fotografía del usuario</label>
 
                                 <img *ngIf="!imagenTemp" [src]="usuario.img | imagen" class="w150" />
-                                <img *ngIf="imagenTemp" [src]="imagenTemp | imagen" class="w150" />
+                                <img *ngIf="imagenTemp" [src]="imagenTemp" class="w150" />
 
 
                                 <input (change)="seleccionImagen( $event.target.files[0] )" type="file" name="image">

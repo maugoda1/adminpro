@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 import { SubirArchivoService } from '../subirArchivo/subir-archivo.service';
 
 @Injectable()
-export class UsuarioService {
+export class UsuarioService { 
 
   usuario: Usuario;
   token: string;
@@ -87,6 +87,7 @@ export class UsuarioService {
 
   }
 
+
   crearUsuario(usuario: Usuario) {
     let url = URL_SERVICIOS + '/usuario';
 
@@ -107,8 +108,11 @@ export class UsuarioService {
     return this.http.put(url, usuario)
           .map( (resp: any) => {
             // this.usuario = resp.usuario;
-            console.log( resp);
-            this.guardarStorage(resp.usuarios._id, this.token, resp.usuarios);
+            // console.log( resp);
+            if ( usuario._id === this.usuario._id) {
+              this.guardarStorage(resp.usuarios._id, this.token, resp.usuarios);
+            }
+
             swal('Usuario Actualizado', this.usuario.nombre , 'success');
             return true;
           });
@@ -129,4 +133,28 @@ export class UsuarioService {
           });
   }
 
+  cargarUsuarios( desde: number = 0) {
+    let url = URL_SERVICIOS + '/usuario?desde=' + desde;
+    return this.http.get( url );
+
+  }
+
+  buscarUsuarios( termino: string ) {
+
+    let url = URL_SERVICIOS + '/busqueda/coleccion/usuarios/' + termino;
+    return this.http.get( url )
+          .map ( (resp: any) => resp.usuarios);
+  }
+
+  borrarUsuario( id: string ) {
+
+    let url = URL_SERVICIOS + '/usuario/' + id;
+    url += '?token=' + this.token;
+
+    return this.http.delete( url )
+          .map(resp => {
+            swal('Usuario Eliminado', 'El usuario ha sido eliminado correctamente', 'success');
+            return true;
+          });
+  }
 }

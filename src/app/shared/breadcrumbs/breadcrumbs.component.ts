@@ -19,7 +19,7 @@ export class BreadcrumbsComponent implements OnInit {
 
     this.getDataRouter().subscribe( data => {
 
-        console.log( data );
+        // console.log( data );
         this.label = data.titulo;
         _title.setTitle(this.label);
         let netaTag: MetaDefinition = {
